@@ -15,6 +15,7 @@ const rollupConfig = {
         "@babel/preset-env",
         "@babel/preset-react",
         "@babel/preset-typescript",
+        "@emotion/babel-preset-css-prop",
       ],
       extensions: [".js", ".jsx", ".ts", ".tsx"],
     }),
