@@ -1,25 +1,25 @@
-import { VStack } from '@components/common/stack'
-import { Field, FieldProps } from 'formik'
-import { CSSProperties } from 'react'
-import * as S from './Input.style'
+import { VStack } from "../stack";
+import { Field, FieldProps } from "formik";
+import { CSSProperties } from "react";
+import * as S from "./Input.style";
 
 export type InputProps = {
-  name: string
-  disabled?: boolean
-  style?: CSSProperties
-  placeholder?: string
-}
+  name: string;
+  disabled?: boolean;
+  style?: CSSProperties;
+  placeholder?: string;
+};
 
 const defaultStyle: CSSProperties = {
-  height: '2rem',
-  width: '100%',
-}
+  height: "2rem",
+  width: "100%",
+};
 
 const Input = ({
   disabled = false,
   name,
   style,
-  placeholder = '',
+  placeholder = "",
 }: InputProps) => {
   return (
     <Field name={name}>
@@ -41,7 +41,7 @@ const Input = ({
         </VStack>
       )}
     </Field>
-  )
-}
+  );
+};
 
-export default Input
+export default Input;

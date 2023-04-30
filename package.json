@@ -8,7 +8,7 @@
     "type": "git",
     "url": "https://github.com/Hyeon1445/s-form-ui.git"
   },
-  "version": "0.1.8",
+  "version": "0.1.11",
   "license": "Apache-2.0",
   "files": [
     "dist"
@@ -41,10 +41,12 @@
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "formik": "^2.2.9",
     "react-scripts": "5.0.1",
     "rollup": "^3.21.1",
     "typescript": "^4.4.2",
-    "web-vitals": "^2.1.0"
+    "web-vitals": "^2.1.0",
+    "yup": "^1.1.1"
   },
   "peerDependencies": {
     "react": "^18.2.0",

@@ -21,7 +21,7 @@
     "jsx": "react-jsx",
     "declaration": true,
     "outDir": "./dist",
-    "baseUrl": "./"
+    "baseUrl": "./",
   },
   "include": [
     "./src/lib/**/*.tsx",
