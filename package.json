@@ -8,7 +8,7 @@
     "type": "git",
     "url": "https://github.com/Hyeon1445/s-form-ui.git"
   },
-  "version": "0.1.12",
+  "version": "0.1.13",
   "license": "Apache-2.0",
   "files": [
     "dist"
@@ -34,6 +34,8 @@
     "@babel/preset-typescript": "^7.21.5",
     "@emotion/babel-preset-css-prop": "^11.10.0",
     "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-commonjs": "^24.1.0",
+    "@rollup/plugin-node-resolve": "^15.0.2",
     "@rollup/plugin-typescript": "^11.1.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
