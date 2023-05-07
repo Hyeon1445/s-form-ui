@@ -7,6 +7,7 @@ export type SelectButtonProps = {
   children?: React.ReactNode;
   isOpen?: boolean;
   onClick?: () => void;
+  style?: CSSProperties;
 };
 
 const defaultStyle: CSSProperties = {
@@ -27,10 +28,11 @@ const Button = ({
   disabled = false,
   isOpen,
   children,
+  style,
 }: SelectButtonProps) => {
   return (
     <S.Button
-      style={{ ...defaultStyle }}
+      style={{ ...defaultStyle, ...style }}
       disabled={disabled}
       onClick={disabled ? undefined : onClick}
     >
