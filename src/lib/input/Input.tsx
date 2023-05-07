@@ -8,6 +8,7 @@ export type InputProps = {
   disabled?: boolean;
   style?: CSSProperties;
   placeholder?: string;
+  type?: "text" | "password" | "number";
 };
 
 const defaultStyle: CSSProperties = {
@@ -20,6 +21,7 @@ const Input = ({
   name,
   style,
   placeholder = "",
+  type = "text",
 }: InputProps) => {
   return (
     <Field name={name}>
@@ -27,7 +29,7 @@ const Input = ({
         field,
         form: { setFieldValue },
         meta: { error, touched, value },
-      }: FieldProps) => (
+      }: FieldProps<string | number>) => (
         <VStack gap="0.25rem">
           <S.StyledInput
             {...field}
@@ -36,6 +38,7 @@ const Input = ({
             hasError={!!touched && !!error}
             disabled={disabled}
             placeholder={placeholder}
+            type={type}
           />
           <S.ErrorMessage>{!!touched && error}</S.ErrorMessage>
         </VStack>
