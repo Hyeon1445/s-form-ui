@@ -1,13 +1,11 @@
-import React, { CSSProperties } from "react";
+import { CSSProperties, ReactNode } from "react";
 import * as S from "./Button.style";
+import { useSelectContext } from "./SelectContext";
 
 export type SelectButtonProps = {
-  name?: string;
   disabled?: boolean;
-  children?: React.ReactNode;
-  isOpen?: boolean;
-  onClick?: () => void;
   style?: CSSProperties;
+  icon?: ReactNode;
 };
 
 const defaultStyle: CSSProperties = {
@@ -22,21 +20,24 @@ const defaultStyle: CSSProperties = {
   fontSize: "12px",
 };
 
-const Button = ({
-  name,
-  onClick,
-  disabled = false,
-  isOpen,
-  children,
-  style,
-}: SelectButtonProps) => {
+const Button = ({ disabled = false, style }: SelectButtonProps) => {
+  const {
+    fieldProps: {
+      meta: { value },
+    },
+    isOpen,
+    setIsOpen,
+  } = useSelectContext();
   return (
     <S.Button
       style={{ ...defaultStyle, ...style }}
       disabled={disabled}
-      onClick={disabled ? undefined : onClick}
+      onClick={() => {
+        if (disabled) return;
+        setIsOpen(!isOpen);
+      }}
     >
-      {children}
+      <p>{value}</p>
       <span>▾</span>
     </S.Button>
   );
