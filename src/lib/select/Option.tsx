@@ -1,6 +1,5 @@
 import React, { CSSProperties, useMemo, useState } from "react";
 import { SelectValue, useSelectContext } from "./SelectContext";
-import styled from "@emotion/styled";
 
 export type SelectOptionProps = {
   children?: React.ReactNode;
