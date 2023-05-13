@@ -14,6 +14,8 @@ type SelectParams = {
   fieldProps: FieldProps;
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  anchor: HTMLButtonElement | null;
+  setAnchor: Dispatch<SetStateAction<HTMLButtonElement | null>>;
 };
 
 export const SelectContext = createContext<SelectParams | undefined>(undefined);
@@ -25,8 +27,12 @@ type ProviderProps = {
 
 const SelectProvider = ({ children, fieldProps }: ProviderProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
+
   return (
-    <SelectContext.Provider value={{ fieldProps, isOpen, setIsOpen }}>
+    <SelectContext.Provider
+      value={{ fieldProps, isOpen, setIsOpen, anchor, setAnchor }}
+    >
       {children}
     </SelectContext.Provider>
   );

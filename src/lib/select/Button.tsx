@@ -18,6 +18,7 @@ const defaultStyle: CSSProperties = {
   alignItems: "center",
   borderRadius: "0.5rem",
   fontSize: "12px",
+  backgroundColor: "white",
 };
 
 const Button = ({ disabled = false, style }: SelectButtonProps) => {
@@ -27,11 +28,14 @@ const Button = ({ disabled = false, style }: SelectButtonProps) => {
     },
     isOpen,
     setIsOpen,
+    setAnchor,
   } = useSelectContext();
   return (
     <S.Button
       style={{ ...defaultStyle, ...style }}
       disabled={disabled}
+      ref={setAnchor}
+      type="button"
       onClick={() => {
         if (disabled) return;
         setIsOpen(!isOpen);

@@ -1,5 +1,15 @@
+import {
+  useFloating,
+  useClick,
+  useDismiss,
+  useInteractions,
+  offset,
+  flip,
+  autoUpdate,
+} from "@floating-ui/react";
 import React, { CSSProperties } from "react";
 import { useSelectContext } from "./SelectContext";
+import * as S from "./Options.style";
 
 export type SelectOptionsProps = {
   children?: React.ReactNode;
@@ -19,9 +29,28 @@ const defaultStyle: CSSProperties = {
 };
 
 const Options = ({ children, style }: SelectOptionsProps) => {
-  const { isOpen } = useSelectContext();
+  const { isOpen, anchor, setIsOpen } = useSelectContext();
+  const { refs, floatingStyles, context } = useFloating({
+    elements: {
+      reference: anchor,
+    },
+    open: isOpen,
+    onOpenChange: setIsOpen,
+    whileElementsMounted: autoUpdate,
+    middleware: [offset(5), flip()],
+  });
+  const click = useClick(context, { event: "mousedown" });
+  const dismiss = useDismiss(context);
+  const { getFloatingProps } = useInteractions([click, dismiss]);
+
   return isOpen ? (
-    <ul style={{ ...defaultStyle, ...style }}>{children}</ul>
+    <S.Container
+      ref={refs.setFloating}
+      {...getFloatingProps()}
+      style={{ ...defaultStyle, ...style, ...floatingStyles }}
+    >
+      {children}
+    </S.Container>
   ) : null;
 };
 

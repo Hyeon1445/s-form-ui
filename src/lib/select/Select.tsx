@@ -20,7 +20,7 @@ const Select = ({ disabled = false, name, children }: SelectProps) => {
     <Field name={name}>
       {(fieldProps: FieldProps<SelectValue>) => (
         <SelectProvider fieldProps={fieldProps}>
-          <div style={{ ...defaultStyle }}>{children}</div>{" "}
+          <div style={{ ...defaultStyle }}>{children}</div>
         </SelectProvider>
       )}
     </Field>
