@@ -8,43 +8,58 @@ import {
   flip,
   autoUpdate,
 } from "@floating-ui/react";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 const PopOver = () => {
+  const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  return (
+    <Container>
+      <PopOverButton
+        ref={setAnchor}
+        type="button"
+        onClick={() => setIsOpen(true)}
+      >
+        button
+      </PopOverButton>
+      {isOpen && (
+        <Options anchor={anchor} isOpen={isOpen} setIsOpen={setIsOpen} />
+      )}
+    </Container>
+  );
+};
+
+const Options = ({
+  anchor,
+  isOpen,
+  setIsOpen,
+}: {
+  anchor: HTMLButtonElement | null;
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+}) => {
   const { refs, floatingStyles, context } = useFloating({
+    elements: {
+      reference: anchor,
+    },
     open: isOpen,
     onOpenChange: setIsOpen,
     whileElementsMounted: autoUpdate,
     middleware: [offset(5), flip()],
   });
-
   const click = useClick(context, { event: "mousedown" });
   const dismiss = useDismiss(context);
-  const { getReferenceProps, getFloatingProps } = useInteractions([
-    click,
-    dismiss,
-  ]);
+  const { getFloatingProps } = useInteractions([click, dismiss]);
 
   return (
-    <Container>
-      <PopOverButton
-        ref={refs.setReference}
-        type="button"
-        {...getReferenceProps()}
-      >
-        button
-      </PopOverButton>
-      {isOpen && (
-        <OptionContainer
-          ref={refs.setFloating}
-          style={floatingStyles}
-          {...getFloatingProps()}
-        >
-          options
-        </OptionContainer>
-      )}
-    </Container>
+    <OptionContainer
+      ref={refs.setFloating}
+      style={floatingStyles}
+      {...getFloatingProps()}
+    >
+      options
+    </OptionContainer>
   );
 };
 
