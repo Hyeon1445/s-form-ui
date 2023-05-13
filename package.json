@@ -52,9 +52,9 @@
     "yup": "^1.1.1"
   },
   "peerDependencies": {
+    "formik": "^2.2.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "formik": "^2.2.9",
     "yup": "^1.1.1"
   },
   "scripts": {
@@ -90,6 +90,7 @@
   },
   "dependencies": {
     "@emotion/react": "^11.10.8",
-    "@emotion/styled": "^11.10.8"
+    "@emotion/styled": "^11.10.8",
+    "@floating-ui/react-dom": "^2.0.0"
   }
 }
