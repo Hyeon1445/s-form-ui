@@ -4,6 +4,7 @@ import Options from "./Options";
 import { Field, FieldProps } from "formik";
 import Button from "./Button";
 import SelectProvider, { SelectValue } from "./SelectContext";
+import Label from "../common/label";
 
 export type SelectProps = {
   name: string;
@@ -30,5 +31,6 @@ const Select = ({ disabled = false, name, children }: SelectProps) => {
 Select.Button = Button;
 Select.Options = Options;
 Select.Option = Option;
+Select.Label = Label;
 
 export default Select;
