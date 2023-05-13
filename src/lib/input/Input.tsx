@@ -2,6 +2,7 @@ import { VStack } from "../stack";
 import { Field, FieldProps } from "formik";
 import { CSSProperties } from "react";
 import * as S from "./Input.style";
+import Label from "../common/label";
 
 export type InputProps = {
   name: string;
@@ -40,11 +41,14 @@ const Input = ({
             placeholder={placeholder}
             type={type}
           />
+          {/* TODO: refactor error message component */}
           <S.ErrorMessage>{!!touched && error}</S.ErrorMessage>
         </VStack>
       )}
     </Field>
   );
 };
+
+Input.Label = Label;
 
 export default Input;
