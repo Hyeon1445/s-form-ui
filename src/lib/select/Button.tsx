@@ -1,11 +1,14 @@
 import { CSSProperties, ReactNode } from "react";
 import * as S from "./Button.style";
 import { useSelectContext } from "./SelectContext";
+import { VStack } from "../stack";
+import ErrorMessage from "../common/error-message";
 
 export type SelectButtonProps = {
   disabled?: boolean;
   style?: CSSProperties;
   icon?: ReactNode;
+  hasErrorMessage?: boolean;
 };
 
 const defaultStyle: CSSProperties = {
@@ -21,29 +24,36 @@ const defaultStyle: CSSProperties = {
   backgroundColor: "white",
 };
 
-const Button = ({ disabled = false, style }: SelectButtonProps) => {
+const Button = ({
+  disabled = false,
+  style,
+  hasErrorMessage = true,
+}: SelectButtonProps) => {
   const {
     fieldProps: {
-      meta: { value },
+      meta: { value, error, touched },
     },
     isOpen,
     setIsOpen,
     setAnchor,
   } = useSelectContext();
   return (
-    <S.Button
-      style={{ ...defaultStyle, ...style }}
-      disabled={disabled}
-      ref={setAnchor}
-      type="button"
-      onClick={() => {
-        if (disabled) return;
-        setIsOpen(!isOpen);
-      }}
-    >
-      <p>{value}</p>
-      <span>▾</span>
-    </S.Button>
+    <VStack>
+      <S.Button
+        style={{ ...defaultStyle, ...style }}
+        disabled={disabled}
+        ref={setAnchor}
+        type="button"
+        onClick={() => {
+          if (disabled) return;
+          setIsOpen(!isOpen);
+        }}
+      >
+        <p>{value}</p>
+        <span>▾</span>
+      </S.Button>
+      {hasErrorMessage && touched && <ErrorMessage>{error}</ErrorMessage>}
+    </VStack>
   );
 };
 
