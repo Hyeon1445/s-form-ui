@@ -41,7 +41,7 @@ const SelectProvider = ({ children, fieldProps }: ProviderProps) => {
 export const useSelectContext = () => {
   const context = useContext(SelectContext);
   if (context === undefined) {
-    throw new Error("useBrandContext must be used within a SelectProvider");
+    throw new Error("useSelectContext must be used within a SelectProvider");
   }
   return context;
 };
