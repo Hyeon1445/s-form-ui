@@ -25,9 +25,3 @@ export const StyledInput = styled.input<{
   }
   background-color: ${({ disabled }) => (disabled ? "#dbdbdb" : "#ffffff")};
 `;
-
-export const ErrorMessage = styled.p`
-  color: red;
-  font-size: 12px;
-  padding: 0.25rem 0;
-`;

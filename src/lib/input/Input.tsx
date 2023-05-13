@@ -2,6 +2,8 @@ import { Field, FieldProps } from "formik";
 import { CSSProperties } from "react";
 import * as S from "./Input.style";
 import Label from "../common/label";
+import ErrorMessage from "../common/error-message";
+import { VStack } from "../stack";
 
 export type InputProps = {
   name: string;
@@ -32,7 +34,7 @@ const Input = ({
         form: { setFieldValue },
         meta: { error, touched, value },
       }: FieldProps<string | number>) => (
-        <>
+        <VStack>
           <S.StyledInput
             {...field}
             style={{ ...defaultStyle, ...style }}
@@ -42,10 +44,8 @@ const Input = ({
             placeholder={placeholder}
             type={type}
           />
-          {hasErrorMessage && touched && (
-            <S.ErrorMessage>{error}</S.ErrorMessage>
-          )}
-        </>
+          {hasErrorMessage && touched && <ErrorMessage>{error}</ErrorMessage>}
+        </VStack>
       )}
     </Field>
   );
