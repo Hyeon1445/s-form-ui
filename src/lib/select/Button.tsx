@@ -50,7 +50,7 @@ const Button = ({
         }}
       >
         <p>{value}</p>
-        <span>▾</span>
+        <S.ArrowIcon isOpen={isOpen}>▾</S.ArrowIcon>
       </S.Button>
       {hasErrorMessage && touched && <ErrorMessage>{error}</ErrorMessage>}
     </VStack>

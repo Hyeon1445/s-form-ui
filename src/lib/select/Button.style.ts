@@ -10,3 +10,8 @@ export const Button = styled.button<{ disabled: boolean }>`
   -ms-user-select: none; /* Internet Explorer/Edge*/
   user-select: none;
 `;
+
+export const ArrowIcon = styled.span<{ isOpen: boolean }>`
+  transform: ${({ isOpen }) => (isOpen ? "rotate(-180deg)" : "rotate(0)")};
+  transition: transform 0.3s;
+`;
