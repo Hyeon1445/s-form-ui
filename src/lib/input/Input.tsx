@@ -1,4 +1,3 @@
-import { VStack } from "../stack";
 import { Field, FieldProps } from "formik";
 import { CSSProperties } from "react";
 import * as S from "./Input.style";
@@ -10,6 +9,7 @@ export type InputProps = {
   style?: CSSProperties;
   placeholder?: string;
   type?: "text" | "password" | "number";
+  hasErrorMessage?: boolean;
 };
 
 const defaultStyle: CSSProperties = {
@@ -23,6 +23,7 @@ const Input = ({
   style,
   placeholder = "",
   type = "text",
+  hasErrorMessage = true,
 }: InputProps) => {
   return (
     <Field name={name}>
@@ -31,7 +32,7 @@ const Input = ({
         form: { setFieldValue },
         meta: { error, touched, value },
       }: FieldProps<string | number>) => (
-        <VStack gap="0.25rem">
+        <>
           <S.StyledInput
             {...field}
             style={{ ...defaultStyle, ...style }}
@@ -41,9 +42,10 @@ const Input = ({
             placeholder={placeholder}
             type={type}
           />
-          {/* TODO: refactor error message component */}
-          <S.ErrorMessage>{!!touched && error}</S.ErrorMessage>
-        </VStack>
+          {hasErrorMessage && touched && (
+            <S.ErrorMessage>{error}</S.ErrorMessage>
+          )}
+        </>
       )}
     </Field>
   );

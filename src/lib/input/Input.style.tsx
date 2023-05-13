@@ -1,8 +1,8 @@
-import styled from '@emotion/styled'
+import styled from "@emotion/styled";
 
 export const StyledInput = styled.input<{
-  hasError: boolean
-  disabled: boolean
+  hasError: boolean;
+  disabled: boolean;
 }>`
   height: 2rem;
   width: 100%;
@@ -11,22 +11,23 @@ export const StyledInput = styled.input<{
   font-size: 12px;
   border: ${({ hasError, disabled }) =>
     disabled
-      ? '2px solid #757575'
+      ? "2px solid #757575"
       : hasError
-      ? '2px solid red'
-      : '2px solid black'};
+      ? "2px solid red"
+      : "2px solid black"};
   &:focus-visible {
     outline: ${({ hasError, disabled }) =>
       disabled
-        ? '1px #757575 auto'
+        ? "1px #757575 auto"
         : hasError
-        ? '1px red auto'
-        : '1px teal auto'};
+        ? "1px red auto"
+        : "1px teal auto"};
   }
-  background-color: ${({ disabled }) => (disabled ? '#dbdbdb' : '#ffffff')};
-`
+  background-color: ${({ disabled }) => (disabled ? "#dbdbdb" : "#ffffff")};
+`;
 
 export const ErrorMessage = styled.p`
   color: red;
   font-size: 12px;
-`
+  padding: 0.25rem 0;
+`;
