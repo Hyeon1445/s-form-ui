@@ -5,6 +5,7 @@ import InputProvider from "./InputContext";
 import Field from "./Field";
 import ErrorMessage from "./ErrorMessage";
 import Tooltip from "./Tooltip";
+import Counter from "./Counter";
 
 export type InputProps = {
   name: string;
@@ -54,5 +55,6 @@ Input.Label = Label;
 Input.Field = Field;
 Input.ErrorMessage = ErrorMessage;
 Input.Tooltip = Tooltip;
+Input.Counter = Counter;
 
 export default Input;
