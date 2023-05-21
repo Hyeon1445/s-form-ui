@@ -14,6 +14,7 @@ export type FormBoxProps<T> = {
   validateOnChange?: boolean;
   validateOnBlur?: boolean;
   validateOnMount?: boolean;
+  enableReinitialize?: boolean;
   onSubmit: (values: T, formikHelpers: FormikHelpers<T>) => void;
 };
 
@@ -26,11 +27,13 @@ const FormBox = <T extends FormikValues>({
   validateOnChange = true,
   validateOnBlur = true,
   validateOnMount = true,
+  enableReinitialize = true,
 }: FormBoxProps<T>) => {
   return (
     <Formik
       initialValues={initialValues}
       onSubmit={onSubmit}
+      enableReinitialize={enableReinitialize}
       validationSchema={validationSchema}
       validateOnBlur={validateOnBlur}
       validateOnChange={validateOnChange}
