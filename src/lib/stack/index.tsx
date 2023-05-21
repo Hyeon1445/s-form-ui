@@ -1,38 +1,21 @@
-import styled from '@emotion/styled'
-import { CSSProperties } from 'react'
+import styled from "@emotion/styled";
+import { CSSProperties, ReactNode } from "react";
+import { Stack, StyledStackProps } from "./Stack.style";
 
-interface StackProps {
-  justifyContent?: CSSProperties['justifyContent']
-  alignItems?: CSSProperties['alignItems']
-  width?: string
-  height?: string
-  background?: string
-  margin?: string
-  padding?: string
-  gap?: string
-}
+type StackProps = StyledStackProps & {
+  children?: ReactNode;
+};
 
-const HStack = styled.div<StackProps>`
-  display: flex;
-  justify-content: ${({ justifyContent }) => justifyContent};
-  align-items: ${({ alignItems }) => alignItems};
-  width: ${({ width }) => width};
-  height: ${({ height }) => height};
-  margin: ${({ margin }) => margin};
-  padding: ${({ padding }) => padding};
-  gap: ${({ gap }) => gap};
-`
+const HStack = ({ children, ...props }: StackProps) => {
+  return <Stack {...props}>{children}</Stack>;
+};
 
-const VStack = styled.div<StackProps>`
-  display: flex;
-  flex-direction: column;
-  justify-content: ${({ justifyContent }) => justifyContent};
-  align-items: ${({ alignItems }) => alignItems};
-  width: ${({ width }) => width};
-  height: ${({ height }) => height};
-  margin: ${({ margin }) => margin};
-  padding: ${({ padding }) => padding};
-  gap: ${({ gap }) => gap};
-`
+const VStack = ({ children, ...props }: StackProps) => {
+  return (
+    <Stack {...props} isVStack>
+      {children}
+    </Stack>
+  );
+};
 
-export { HStack, VStack }
+export { VStack, HStack };
