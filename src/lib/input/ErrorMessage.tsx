@@ -8,7 +8,7 @@ type ErrorMessageType = {
 const defaultStyle: CSSProperties = {
   color: "red",
   fontSize: "0.75rem",
-  margin: "0.25rem 0",
+  margin: "0.5rem 0",
 };
 
 const ErrorMessage = ({ style }: ErrorMessageType) => {

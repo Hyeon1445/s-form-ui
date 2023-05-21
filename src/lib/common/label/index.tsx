@@ -6,8 +6,8 @@ type LabelProps = {
 };
 
 const defaultStyle: CSSProperties = {
-  fontSize: "10px",
-  margin: "0.25rem 0",
+  fontSize: "12px",
+  margin: "0.5rem 0",
   display: "inline-block",
 };
 
