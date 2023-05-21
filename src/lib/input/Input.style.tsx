@@ -11,17 +11,17 @@ export const StyledInput = styled.input<{
   font-size: 12px;
   border: ${({ hasError, disabled }) =>
     disabled
-      ? "2px solid #757575"
+      ? "1px solid #757575"
       : hasError
-      ? "2px solid red"
-      : "2px solid black"};
+      ? "1px solid red"
+      : "1px solid black"};
   &:focus-visible {
     outline: ${({ hasError, disabled }) =>
       disabled
         ? "1px #757575 auto"
         : hasError
-        ? "1px red auto"
-        : "1px teal auto"};
+        ? "0.5px red auto"
+        : "0.5px black auto"};
   }
   background-color: ${({ disabled }) => (disabled ? "#dbdbdb" : "#ffffff")};
 `;
