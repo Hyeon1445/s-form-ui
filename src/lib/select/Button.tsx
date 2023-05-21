@@ -1,11 +1,12 @@
-import { CSSProperties, ReactNode } from "react";
+import { CSSProperties, ReactNode, useMemo } from "react";
 import * as S from "./Button.style";
 import { useSelectContext } from "./SelectContext";
-import { VStack } from "../stack";
 
 export type SelectButtonProps = {
   disabled?: boolean;
   style?: CSSProperties;
+  disabledStyle?: CSSProperties;
+  errorStyle?: CSSProperties;
   icon?: ReactNode;
 };
 
@@ -22,31 +23,52 @@ const defaultStyle: CSSProperties = {
   backgroundColor: "white",
 };
 
-const Button = ({ disabled = false, style }: SelectButtonProps) => {
+const defaultDisabledStyle: CSSProperties = {
+  ...defaultStyle,
+  border: "1px solid #dbdbdb",
+  backgroundColor: "#f2f2f2",
+  color: "#757575",
+  cursor: "not-allowed",
+};
+
+const defaultErrorStyle: CSSProperties = {
+  ...defaultStyle,
+  border: "1px solid red",
+};
+
+const Button = ({
+  style,
+  icon,
+  disabledStyle,
+  errorStyle,
+}: SelectButtonProps) => {
   const {
     fieldProps: {
-      meta: { value, error, touched },
+      meta: { value, touched, error },
     },
     isOpen,
     setIsOpen,
     setAnchor,
+    disabled,
   } = useSelectContext();
+  const buttonStyle: CSSProperties = useMemo(() => {
+    if (disabled) return { ...defaultDisabledStyle, ...disabledStyle };
+    if (touched && error) return { ...defaultErrorStyle, ...errorStyle };
+    return { ...defaultStyle, ...style };
+  }, [disabled, disabledStyle, error, errorStyle, style, touched]);
   return (
-    <VStack>
-      <S.Button
-        style={{ ...defaultStyle, ...style }}
-        disabled={disabled}
-        ref={setAnchor}
-        type="button"
-        onClick={() => {
-          if (disabled) return;
-          setIsOpen(!isOpen);
-        }}
-      >
-        <p>{value}</p>
-        <S.ArrowIcon isOpen={isOpen}>▾</S.ArrowIcon>
-      </S.Button>
-    </VStack>
+    <S.Button
+      style={buttonStyle}
+      ref={setAnchor}
+      type="button"
+      onClick={() => {
+        if (disabled) return;
+        setIsOpen(!isOpen);
+      }}
+    >
+      <p>{value}</p>
+      <S.ArrowIcon isOpen={isOpen}>▾</S.ArrowIcon>
+    </S.Button>
   );
 };
 

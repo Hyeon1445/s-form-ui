@@ -16,6 +16,7 @@ type SelectParams = {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   anchor: HTMLButtonElement | null;
   setAnchor: Dispatch<SetStateAction<HTMLButtonElement | null>>;
+  disabled?: boolean;
 };
 
 export const SelectContext = createContext<SelectParams | undefined>(undefined);
@@ -23,15 +24,20 @@ export const SelectContext = createContext<SelectParams | undefined>(undefined);
 type ProviderProps = {
   children?: ReactNode;
   fieldProps: FieldProps<SelectValue>;
+  disabled?: boolean;
 };
 
-const SelectProvider = ({ children, fieldProps }: ProviderProps) => {
+const SelectProvider = ({
+  children,
+  fieldProps,
+  disabled = false,
+}: ProviderProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
 
   return (
     <SelectContext.Provider
-      value={{ fieldProps, isOpen, setIsOpen, anchor, setAnchor }}
+      value={{ fieldProps, isOpen, setIsOpen, anchor, setAnchor, disabled }}
     >
       {children}
     </SelectContext.Provider>
