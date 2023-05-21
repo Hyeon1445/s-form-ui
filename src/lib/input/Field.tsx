@@ -24,6 +24,7 @@ const defaultDisabledStyle: CSSProperties = {
   border: "1px solid #dbdbdb",
   backgroundColor: "#f2f2f2",
   color: "#757575",
+  cursor: "not-allowed",
 };
 
 const defaultErrorStyle: CSSProperties = {
@@ -42,8 +43,8 @@ const Field = ({
   const inputStyle: CSSProperties = useMemo(() => {
     if (props.disabled) return { ...defaultDisabledStyle, ...disabledStyle };
     if (touched && error) return { ...defaultErrorStyle, ...errorStyle };
-    return { ...defaultStyle };
-  }, [disabledStyle, error, errorStyle, props.disabled, touched]);
+    return { ...defaultStyle, ...style };
+  }, [disabledStyle, error, errorStyle, style, props.disabled, touched]);
 
   return (
     <S.StyledInputField
