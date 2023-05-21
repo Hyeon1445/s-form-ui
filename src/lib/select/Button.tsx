@@ -67,7 +67,7 @@ const Button = ({
       }}
     >
       <p>{value}</p>
-      <S.ArrowIcon isOpen={isOpen}>▾</S.ArrowIcon>
+      {icon ?? <S.ArrowIcon isOpen={isOpen}>▾</S.ArrowIcon>}
     </S.Button>
   );
 };
