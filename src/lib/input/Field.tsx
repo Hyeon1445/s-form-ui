@@ -37,7 +37,7 @@ const Field = ({
   errorStyle,
   ...props
 }: InputFieldProps) => {
-  const { fieldProps } = useInputContext();
+  const { fieldProps, setAnchor } = useInputContext();
   const { error, touched } = fieldProps.meta;
   const inputStyle: CSSProperties = useMemo(() => {
     if (props.disabled) return { ...defaultDisabledStyle, ...disabledStyle };
@@ -49,6 +49,7 @@ const Field = ({
     <S.StyledInputField
       {...props}
       {...fieldProps.field}
+      ref={setAnchor}
       style={inputStyle}
       hasError={!!(error && touched)}
     />

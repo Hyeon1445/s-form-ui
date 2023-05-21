@@ -12,8 +12,8 @@ export type InputValue = string | number | null;
 
 type InputParams = {
   fieldProps: FieldProps;
-  anchor: HTMLButtonElement | null;
-  setAnchor: Dispatch<SetStateAction<HTMLButtonElement | null>>;
+  anchor: HTMLInputElement | null;
+  setAnchor: Dispatch<SetStateAction<HTMLInputElement | null>>;
 };
 
 export const InputContext = createContext<InputParams | undefined>(undefined);
@@ -24,7 +24,7 @@ type ProviderProps = {
 };
 
 const InputProvider = ({ children, fieldProps }: ProviderProps) => {
-  const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
+  const [anchor, setAnchor] = useState<HTMLInputElement | null>(null);
 
   return (
     <InputContext.Provider value={{ fieldProps, anchor, setAnchor }}>

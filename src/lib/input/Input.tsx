@@ -4,6 +4,7 @@ import Label from "../common/label";
 import InputProvider from "./InputContext";
 import Field from "./Field";
 import ErrorMessage from "./ErrorMessage";
+import Tooltip from "./Tooltip";
 
 export type InputProps = {
   name: string;
@@ -52,5 +53,6 @@ const Input = ({
 Input.Label = Label;
 Input.Field = Field;
 Input.ErrorMessage = ErrorMessage;
+Input.Tooltip = Tooltip;
 
 export default Input;
