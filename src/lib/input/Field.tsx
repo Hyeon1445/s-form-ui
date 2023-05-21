@@ -6,7 +6,8 @@ type InputFieldProps = {
   style?: CSSProperties;
   disabledStyle?: CSSProperties;
   errorStyle?: CSSProperties;
-} & InputHTMLAttributes<HTMLInputElement>;
+  type?: "text" | "number" | "password";
+} & Omit<InputHTMLAttributes<HTMLInputElement>, "type">;
 
 const defaultStyle: CSSProperties = {
   height: "2rem",
@@ -36,6 +37,7 @@ const Field = ({
   style,
   disabledStyle,
   errorStyle,
+  type = "text",
   ...props
 }: InputFieldProps) => {
   const { fieldProps, setAnchor } = useInputContext();
@@ -50,6 +52,7 @@ const Field = ({
     <S.StyledInputField
       {...props}
       {...fieldProps.field}
+      type={type}
       ref={setAnchor}
       style={inputStyle}
       hasError={!!(error && touched)}
