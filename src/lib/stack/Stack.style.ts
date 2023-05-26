@@ -1,20 +1,9 @@
 import styled from "@emotion/styled";
-import { CSSProperties } from "react";
+import { StackProps } from ".";
 
-export type StyledStackProps = {
-  justifyContent?: CSSProperties["justifyContent"];
-  alignItems?: CSSProperties["alignItems"];
-  width?: string;
-  height?: string;
-  background?: string;
-  margin?: string;
-  padding?: string;
-  gap?: string;
-};
-
-export const Stack = styled.div<StyledStackProps & { isVStack?: boolean }>`
+export const Stack = styled.div<StackProps>`
   display: flex;
-  flex-direction: ${({ isVStack }) => isVStack && "column"};
+  flex-direction: ${({ direction }) => direction === "col" && "column"};
   justify-content: ${({ justifyContent }) => justifyContent};
   align-items: ${({ alignItems }) => alignItems};
   width: ${({ width }) => width};

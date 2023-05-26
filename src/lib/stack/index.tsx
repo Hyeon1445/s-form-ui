@@ -1,21 +1,21 @@
-import styled from "@emotion/styled";
 import { CSSProperties, ReactNode } from "react";
-import { Stack, StyledStackProps } from "./Stack.style";
+import * as S from "./Stack.style";
 
-type StackProps = StyledStackProps & {
+export type StackProps = {
   children?: ReactNode;
+  direction?: "row" | "col";
+  justifyContent?: CSSProperties["justifyContent"];
+  alignItems?: CSSProperties["alignItems"];
+  width?: string;
+  height?: string;
+  background?: string;
+  margin?: string;
+  padding?: string;
+  gap?: string;
 };
 
-const HStack = ({ children, ...props }: StackProps) => {
-  return <Stack {...props}>{children}</Stack>;
+const Stack = ({ children, ...props }: StackProps) => {
+  return <S.Stack {...props}>{children}</S.Stack>;
 };
 
-const VStack = ({ children, ...props }: StackProps) => {
-  return (
-    <Stack {...props} isVStack>
-      {children}
-    </Stack>
-  );
-};
-
-export { VStack, HStack };
+export default Stack;
