@@ -4,6 +4,7 @@ import RadioProvider from "./RadioContext";
 import Label from "../common/label";
 import Button from "./Button";
 import Option from "./Option";
+import ErrorMessage from "./ErrorMessage";
 
 export type RadioProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
@@ -16,8 +17,7 @@ export type RadioProps = Omit<
 
 const defaultStyle: CSSProperties = {
   display: "flex",
-  gap: "0.5rem",
-  flexWrap: "wrap",
+  flexDirection: "column",
 };
 
 const Radio = ({ name, children, style }: RadioProps) => {
@@ -35,5 +35,6 @@ const Radio = ({ name, children, style }: RadioProps) => {
 Radio.Label = Label;
 Radio.Button = Button;
 Radio.Option = Option;
+Radio.ErrorMessage = ErrorMessage;
 
 export default Radio;
