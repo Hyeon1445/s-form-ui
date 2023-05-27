@@ -7,6 +7,7 @@ export type SelectOptionProps = {
   value: SelectValue;
   hoverStyle?: CSSProperties;
   selectedOptionStyle?: CSSProperties;
+  onChange?: (value?: SelectValue) => void;
 };
 
 const defaultStyle: CSSProperties = {
@@ -19,6 +20,7 @@ const Option = ({
   children,
   style,
   value,
+  onChange,
   hoverStyle = { ...style, backgroundColor: "#00808030" },
   selectedOptionStyle = {
     ...style,
@@ -47,8 +49,9 @@ const Option = ({
       onMouseOver={() => setIsMouseOver(true)}
       onMouseOut={() => setIsMouseOver(false)}
       onClick={() => {
-        setFieldValue(name, value);
+        setFieldValue(name, value, !onChange);
         setIsOpen(false);
+        onChange && onChange(value);
       }}
     >
       {children}
