@@ -24,7 +24,6 @@ const defaultStyle: CSSProperties = {
 };
 
 const defaultDisabledStyle: CSSProperties = {
-  ...defaultStyle,
   border: "1px solid #dbdbdb",
   backgroundColor: "#f2f2f2",
   color: "#757575",
@@ -32,7 +31,6 @@ const defaultDisabledStyle: CSSProperties = {
 };
 
 const defaultErrorStyle: CSSProperties = {
-  ...defaultStyle,
   border: "1px solid red",
 };
 
@@ -51,10 +49,13 @@ const Button = ({
     setAnchor,
     disabled,
   } = useSelectContext();
+  const commonStyle = { ...defaultStyle, ...style };
   const buttonStyle: CSSProperties = useMemo(() => {
-    if (disabled) return { ...defaultDisabledStyle, ...disabledStyle };
-    if (touched && error) return { ...defaultErrorStyle, ...errorStyle };
-    return { ...defaultStyle, ...style };
+    if (disabled)
+      return { ...commonStyle, ...defaultDisabledStyle, ...disabledStyle };
+    if (touched && error)
+      return { ...commonStyle, ...defaultErrorStyle, ...errorStyle };
+    return commonStyle;
   }, [disabled, disabledStyle, error, errorStyle, style, touched]);
   return (
     <S.Button

@@ -21,7 +21,6 @@ const defaultStyle: CSSProperties = {
 };
 
 const defaultDisabledStyle: CSSProperties = {
-  ...defaultStyle,
   border: "1px solid #dbdbdb",
   backgroundColor: "#f2f2f2",
   color: "#757575",
@@ -29,7 +28,6 @@ const defaultDisabledStyle: CSSProperties = {
 };
 
 const defaultErrorStyle: CSSProperties = {
-  ...defaultStyle,
   border: "1px solid red",
 };
 
@@ -42,10 +40,17 @@ const Field = ({
 }: InputFieldProps) => {
   const { fieldProps, setAnchor } = useInputContext();
   const { error, touched } = fieldProps.meta;
+  const commonStyle = { ...defaultStyle, ...style };
   const inputStyle: CSSProperties = useMemo(() => {
-    if (props.disabled) return { ...defaultDisabledStyle, ...disabledStyle };
-    if (touched && error) return { ...defaultErrorStyle, ...errorStyle };
-    return { ...defaultStyle, ...style };
+    if (props.disabled)
+      return {
+        ...commonStyle,
+        ...defaultDisabledStyle,
+        ...disabledStyle,
+      };
+    if (touched && error)
+      return { ...commonStyle, ...defaultErrorStyle, ...errorStyle };
+    return commonStyle;
   }, [disabledStyle, error, errorStyle, style, props.disabled, touched]);
 
   return (

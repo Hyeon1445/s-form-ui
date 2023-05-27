@@ -16,18 +16,23 @@ const defaultStyle: CSSProperties = {
   cursor: "pointer",
 };
 
+const defaultHoverStyle: CSSProperties = {
+  backgroundColor: "#00808030",
+};
+
+const defaultSelectedStyle: CSSProperties = {
+  backgroundColor: "#00808090",
+  color: "white",
+  fontWeight: "bold",
+};
+
 const Option = ({
   children,
   style,
   value,
   onChange,
-  hoverStyle = { ...style, backgroundColor: "#00808030" },
-  selectedOptionStyle = {
-    ...style,
-    backgroundColor: "#00808090",
-    color: "white",
-    fontWeight: "bold",
-  },
+  hoverStyle,
+  selectedOptionStyle,
 }: SelectOptionProps) => {
   const {
     fieldProps: {
@@ -37,10 +42,17 @@ const Option = ({
     setIsOpen,
   } = useSelectContext();
   const [isMouseOver, setIsMouseOver] = useState<boolean>(false);
+  const commonStyle = { ...defaultStyle, ...style };
   const optionStyle = useMemo(() => {
-    if (selectedValue === value) return selectedOptionStyle;
-    if (isMouseOver) return hoverStyle;
-    return defaultStyle;
+    if (selectedValue === value)
+      return {
+        ...commonStyle,
+        ...defaultSelectedStyle,
+        ...selectedOptionStyle,
+      };
+    if (isMouseOver)
+      return { ...commonStyle, ...defaultHoverStyle, ...hoverStyle };
+    return commonStyle;
   }, [selectedValue, isMouseOver, hoverStyle, selectedOptionStyle, value]);
 
   return (

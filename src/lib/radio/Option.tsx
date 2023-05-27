@@ -28,13 +28,11 @@ const defaultCheckedStyle: CSSProperties = {
 };
 
 const defaultDisabledStyle: CSSProperties = {
-  ...defaultStyle,
   color: "#dbdbdb",
   cursor: "not-allowed",
 };
 
 const defaultDisabledCheckedStyle: CSSProperties = {
-  ...defaultStyle,
   color: "#dbdbdb",
   fontWeight: "bold",
   cursor: "not-allowed",
@@ -58,14 +56,19 @@ const Option = ({
     },
   } = useRadioContext();
   const checked = value === selectedValue;
+  const commonStyle = { ...defaultStyle, ...style };
   const radioOptionStyle = useMemo(() => {
     if (disabled && checked)
-      return { ...defaultDisabledCheckedStyle, ...disabledCheckedStyle };
+      return {
+        ...commonStyle,
+        ...defaultDisabledCheckedStyle,
+        ...disabledCheckedStyle,
+      };
     if (disabled && !checked)
-      return { ...defaultDisabledStyle, ...disabledStyle };
+      return { ...commonStyle, ...defaultDisabledStyle, ...disabledStyle };
     if (!disabled && checked)
-      return { ...defaultCheckedStyle, ...checkedStyle };
-    if (!disabled && !checked) return { ...defaultStyle, ...style };
+      return { ...commonStyle, ...defaultCheckedStyle, ...checkedStyle };
+    if (!disabled && !checked) return commonStyle;
   }, [disabled, checked]);
 
   return (
