@@ -12,7 +12,7 @@ const defaultStyle: CSSProperties = {
 };
 
 const Label = ({ children, style = {} }: LabelProps) => {
-  return <label style={{ ...defaultStyle, ...style }}>{children}</label>;
+  return <p style={{ ...defaultStyle, ...style }}>{children}</p>;
 };
 
 export default Label;
