@@ -1,7 +1,7 @@
 import { FieldProps } from "formik";
 import { ReactNode, createContext, useContext } from "react";
 
-export type RadioValue = string | number | null;
+export type RadioValue = string | number | readonly string[] | undefined;
 
 type RadioParams = {
   fieldProps: FieldProps;
