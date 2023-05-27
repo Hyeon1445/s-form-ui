@@ -1,61 +1,62 @@
 import { FormikValues } from "formik";
-import { CSSProperties, InputHTMLAttributes, useMemo } from "react";
+import React, { CSSProperties, ReactNode, cloneElement, useMemo } from "react";
 import { useRadioContext } from "./RadioContext";
+import Radio from ".";
 
-type ButtonProps = {
+type OptionProps = {
+  children: ReactNode;
   style?: CSSProperties;
   checkedStyle?: CSSProperties;
   disabledStyle?: CSSProperties;
   disabledCheckedStyle?: CSSProperties;
   disabled?: boolean | ((values: FormikValues) => boolean);
-} & Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "type | 'style">;
+  value?: string | number | readonly string[];
+};
 
 const defaultStyle: CSSProperties = {
-  verticalAlign: "middle",
-  appearance: "none",
-  border: "2px solid #dbdbdb",
-  borderRadius: "50%",
-  width: "1.25rem",
-  height: "1.25rem",
+  display: "flex",
+  gap: "0.5rem",
+  fontSize: "14px",
   cursor: "pointer",
 };
 
 const defaultCheckedStyle: CSSProperties = {
   ...defaultStyle,
-  border: "0.4rem solid teal",
+  fontWeight: "bold",
+  cursor: "pointer",
 };
 
 const defaultDisabledStyle: CSSProperties = {
   ...defaultStyle,
-  border: "2px solid #dbdbdb",
-  backgroundColor: "#f2f2f2",
+  color: "#dbdbdb",
   cursor: "not-allowed",
 };
 
 const defaultDisabledCheckedStyle: CSSProperties = {
   ...defaultStyle,
-  border: "0.4rem solid #dbdbdb",
+  color: "#dbdbdb",
+  fontWeight: "bold",
   cursor: "not-allowed",
 };
 
-const Button = ({
+const Option = ({
   disabled = false,
   style,
   checkedStyle,
   disabledStyle,
   disabledCheckedStyle,
   value,
-  ...props
-}: ButtonProps) => {
+  children,
+}: OptionProps) => {
   const {
     fieldProps: {
-      field,
+      field: { name },
       meta: { value: selectedValue },
       form: { setFieldValue, setFieldTouched },
     },
   } = useRadioContext();
   const checked = value === selectedValue;
-  const radioStyle = useMemo(() => {
+  const radioOptionStyle = useMemo(() => {
     if (disabled && checked)
       return { ...defaultDisabledCheckedStyle, ...disabledCheckedStyle };
     if (disabled && !checked)
@@ -63,25 +64,26 @@ const Button = ({
     if (!disabled && checked)
       return { ...defaultCheckedStyle, ...checkedStyle };
     if (!disabled && !checked) return { ...defaultStyle, ...style };
-  }, [checked, disabled]);
+  }, [disabled, checked]);
 
   return (
-    <input
-      {...field}
-      {...props}
-      type="radio"
-      id={value?.toString()}
-      value={value}
-      checked={checked}
-      style={radioStyle}
-      onChange={() => {
+    <label
+      style={radioOptionStyle}
+      onClick={() => {
         if (!disabled) {
-          setFieldTouched(field.name, true);
-          setFieldValue(field.name, value);
+          setFieldTouched(name, true);
+          setFieldValue(name, value);
         }
       }}
-    />
+    >
+      {React.Children.map(children, (child) => {
+        if (React.isValidElement(child) && child.type === Radio.Button) {
+          return cloneElement(child, { ...child.props, value, disabled });
+        }
+        return child;
+      })}
+    </label>
   );
 };
 
-export default Button;
+export default Option;
