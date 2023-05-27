@@ -1,5 +1,5 @@
 import { Field as FormikField, FieldProps } from "formik";
-import { CSSProperties, ReactNode } from "react";
+import { CSSProperties, InputHTMLAttributes, ReactNode } from "react";
 import Label from "../common/label";
 import InputProvider from "./InputContext";
 import Field from "./Field";
@@ -7,7 +7,10 @@ import ErrorMessage from "./ErrorMessage";
 import Tooltip from "./Tooltip";
 import Counter from "./Counter";
 
-export type InputProps = {
+export type InputProps = Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "type" | "placeholder" | "disabled"
+> & {
   name: string;
   disabled?: boolean;
   style?: CSSProperties;
@@ -28,6 +31,7 @@ const Input = ({
   placeholder = "",
   type = "text",
   children,
+  ...props
 }: InputProps) => {
   return (
     <FormikField name={name}>
@@ -38,6 +42,7 @@ const Input = ({
           ) : (
             <div style={{ ...defaultStyle, ...style }}>
               <Field
+                {...props}
                 placeholder={placeholder}
                 type={type}
                 disabled={disabled}
