@@ -15,7 +15,7 @@ export type InputProps = Omit<
   disabled?: boolean;
   style?: CSSProperties;
   placeholder?: string;
-  type?: "text" | "password" | "number";
+  type?: "text" | "password" | "number" | "color";
   children?: ReactNode;
 };
 

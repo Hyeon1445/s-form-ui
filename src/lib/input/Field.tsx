@@ -6,7 +6,7 @@ type InputFieldProps = {
   style?: CSSProperties;
   disabledStyle?: CSSProperties;
   errorStyle?: CSSProperties;
-  type?: "text" | "number" | "password";
+  type?: "text" | "number" | "password" | "color";
 } & Omit<InputHTMLAttributes<HTMLInputElement>, "type">;
 
 const defaultStyle: CSSProperties = {
