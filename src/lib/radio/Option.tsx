@@ -1,6 +1,6 @@
 import { FormikValues } from "formik";
 import React, { CSSProperties, ReactNode, cloneElement, useMemo } from "react";
-import { useRadioContext } from "./RadioContext";
+import { RadioValue, useRadioContext } from "./RadioContext";
 import Radio from ".";
 
 type OptionProps = {
@@ -10,7 +10,8 @@ type OptionProps = {
   disabledStyle?: CSSProperties;
   disabledCheckedStyle?: CSSProperties;
   disabled?: boolean | ((values: FormikValues) => boolean);
-  value?: string | number | readonly string[];
+  value?: RadioValue;
+  onChange?: (value?: RadioValue) => void;
 };
 
 const defaultStyle: CSSProperties = {
@@ -47,6 +48,7 @@ const Option = ({
   disabledCheckedStyle,
   value,
   children,
+  onChange,
 }: OptionProps) => {
   const {
     fieldProps: {
@@ -72,7 +74,8 @@ const Option = ({
       onClick={() => {
         if (!disabled) {
           setFieldTouched(name, true);
-          setFieldValue(name, value);
+          setFieldValue(name, value, !onChange);
+          onChange && onChange(value);
         }
       }}
     >
