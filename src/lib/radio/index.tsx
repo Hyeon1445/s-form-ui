@@ -13,6 +13,7 @@ export type RadioProps = Omit<
   name: string;
   children: ReactNode;
   style?: CSSProperties;
+  onChange?: (value?: RadioValue) => void;
 };
 
 const defaultStyle: CSSProperties = {
@@ -20,11 +21,11 @@ const defaultStyle: CSSProperties = {
   flexDirection: "column",
 };
 
-const Radio = ({ name, children, style }: RadioProps) => {
+const Radio = ({ name, children, style, onChange }: RadioProps) => {
   return (
     <Field id={name} name={name}>
       {(fieldProps: FieldProps<RadioValue>) => (
-        <RadioProvider fieldProps={fieldProps}>
+        <RadioProvider fieldProps={fieldProps} onChange={onChange}>
           <div style={{ ...defaultStyle, ...style }}>{children}</div>
         </RadioProvider>
       )}

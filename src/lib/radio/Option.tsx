@@ -73,6 +73,7 @@ const Option = ({
 
   return (
     <label
+      htmlFor={name}
       style={radioOptionStyle}
       onClick={() => {
         if (!disabled) {

@@ -1,6 +1,6 @@
 import { FormikValues } from "formik";
 import { CSSProperties, InputHTMLAttributes, useMemo } from "react";
-import { RadioValue, useRadioContext } from "./RadioContext";
+import { useRadioContext } from "./RadioContext";
 
 type ButtonProps = {
   style?: CSSProperties;
@@ -8,7 +8,6 @@ type ButtonProps = {
   disabledStyle?: CSSProperties;
   disabledCheckedStyle?: CSSProperties;
   disabled?: boolean | ((values: FormikValues) => boolean);
-  onChange?: (value?: RadioValue) => void;
 } & Omit<
   InputHTMLAttributes<HTMLInputElement>,
   "size" | "type | 'style" | "onChange"
@@ -46,7 +45,6 @@ const Button = ({
   disabledStyle,
   disabledCheckedStyle,
   value,
-  onChange,
   ...props
 }: ButtonProps) => {
   const {
@@ -55,6 +53,7 @@ const Button = ({
       meta: { value: selectedValue },
       form: { setFieldValue, setFieldTouched },
     },
+    onChange,
   } = useRadioContext();
   const commonStyle = { ...defaultStyle, ...style };
   const checked = value === selectedValue;
@@ -77,7 +76,6 @@ const Button = ({
       {...field}
       {...props}
       type="radio"
-      id={value?.toString()}
       value={value}
       checked={checked}
       style={radioStyle}

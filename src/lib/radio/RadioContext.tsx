@@ -5,6 +5,7 @@ export type RadioValue = string | number | readonly string[] | undefined;
 
 type RadioParams = {
   fieldProps: FieldProps;
+  onChange?: (value?: RadioValue) => void;
 };
 
 export const RadioContext = createContext<RadioParams | undefined>(undefined);
@@ -12,11 +13,12 @@ export const RadioContext = createContext<RadioParams | undefined>(undefined);
 type ProviderProps = {
   children?: ReactNode;
   fieldProps: FieldProps<RadioValue>;
+  onChange?: (value?: RadioValue) => void;
 };
 
-const RadioProvider = ({ children, fieldProps }: ProviderProps) => {
+const RadioProvider = ({ children, fieldProps, onChange }: ProviderProps) => {
   return (
-    <RadioContext.Provider value={{ fieldProps }}>
+    <RadioContext.Provider value={{ fieldProps, onChange }}>
       {children}
     </RadioContext.Provider>
   );
