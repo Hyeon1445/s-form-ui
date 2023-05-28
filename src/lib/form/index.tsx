@@ -1,4 +1,10 @@
-import { Form, Formik, FormikHelpers, FormikProps, FormikValues } from "formik";
+import {
+  FormikForm,
+  Formik,
+  FormikHelpers,
+  FormikProps,
+  FormikValues,
+} from "formik";
 import { CSSProperties, ReactNode } from "react";
 import * as yup from "yup";
 
@@ -18,7 +24,7 @@ export type FormBoxProps<T> = {
   onSubmit: (values: T, formikHelpers: FormikHelpers<T>) => void;
 };
 
-const FormBox = <T extends FormikValues>({
+const Form = <T extends FormikValues>({
   style,
   children,
   initialValues,
@@ -40,14 +46,14 @@ const FormBox = <T extends FormikValues>({
       validateOnMount={validateOnMount}
     >
       {(formikProps: FormikProps<T>) => (
-        <Form>
+        <FormikForm>
           <div style={{ ...defaultStyle, ...style }}>
             {typeof children === "function" ? children(formikProps) : children}
           </div>
-        </Form>
+        </FormikForm>
       )}
     </Formik>
   );
 };
 
-export default FormBox;
+export default Form;
