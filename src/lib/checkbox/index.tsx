@@ -1,71 +1,57 @@
-import { CSSProperties, InputHTMLAttributes } from "react";
+import { CSSProperties, ReactNode } from "react";
 import Label from "../common/label";
-import * as S from "./Checkbox.style";
 import { Field, FieldProps } from "formik";
 import CheckboxProvider from "./CheckboxContext";
+import Button from "./Button";
 
-type CheckboxProps = Omit<
-  InputHTMLAttributes<HTMLInputElement>,
-  | "type"
-  | "placeholder"
-  | "disabled"
-  | "onChange"
-  | "value"
-  | "size"
-  | "checked"
-  | "style"
-> & {
+type CheckboxProps = {
   name: string;
   disabled?: boolean;
-  size?: CSSProperties["width"];
-  color?: CSSProperties["backgroundColor"];
-  borderColor?: CSSProperties["borderColor"];
-  disabledColor?: CSSProperties["backgroundColor"];
-  disabledBorderColor?: CSSProperties["borderColor"];
-  borderRadius?: CSSProperties["borderRadius"];
+  children?: ReactNode;
+  label?: ReactNode;
+  style?: CSSProperties;
+  onChange?: (value?: boolean) => void;
+};
+
+const defaultStyle: CSSProperties = {
+  display: "flex",
+  gap: "0.25rem",
+  fontSize: "14px",
+  color: "#757575",
+  alignItems: "center",
 };
 
 const Checkbox = ({
   name,
   disabled = false,
-  size = "1.25rem",
-  color = "teal",
-  borderColor = "#757575",
-  disabledColor = "#dbdbdb",
-  disabledBorderColor = "#dbdbdb",
-  borderRadius = "0.25rem",
-  ...inputProps
+  children,
+  label = "",
+  style,
+  onChange,
 }: CheckboxProps) => {
   return (
     <Field name={name}>
       {(fieldProps: FieldProps<boolean>) => (
-        <CheckboxProvider fieldProps={fieldProps}>
-          <span className="no-select">
-            <S.HiddenInput
-              {...inputProps}
-              type="checkbox"
-              id={name}
-              onChange={() => {
-                if (!disabled) {
-                  fieldProps.form.setFieldTouched(name, true);
-                  fieldProps.form.setFieldValue(name, !fieldProps.meta.value);
-                }
-              }}
-            />
-            <S.Check
-              htmlFor={name}
-              isSelected={fieldProps.meta.value}
-              disabled={disabled}
-              size={size}
-              color={color}
-              borderColor={borderColor}
-              disabledColor={disabledColor}
-              disabledBorderColor={disabledBorderColor}
-              borderRadius={borderRadius}
-            >
-              ✓
-            </S.Check>
-          </span>
+        <CheckboxProvider
+          fieldProps={fieldProps}
+          disabled={disabled}
+          onChange={onChange}
+        >
+          <label
+            htmlFor={name}
+            style={{
+              cursor: disabled ? "not-allowed" : "pointer",
+              ...defaultStyle,
+              ...style,
+            }}
+          >
+            {children ?? (
+              <>
+                <Button />
+                <span>{label}</span>
+              </>
+            )}
+          </label>
         </CheckboxProvider>
       )}
     </Field>
