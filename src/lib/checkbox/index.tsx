@@ -3,6 +3,7 @@ import Label from "../common/label";
 import { Field, FieldProps } from "formik";
 import CheckboxProvider from "./CheckboxContext";
 import Button from "./Button";
+import ErrorMessage from "./ErrorMessage";
 
 type CheckboxProps = {
   name: string;
@@ -92,5 +93,7 @@ const Checkbox = ({
 };
 
 Checkbox.Label = Label;
+Checkbox.Button = Button;
+Checkbox.ErrorMessage = ErrorMessage;
 
 export default Checkbox;
