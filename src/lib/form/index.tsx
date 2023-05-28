@@ -1,5 +1,5 @@
 import {
-  FormikForm,
+  Form as FormikForm,
   Formik,
   FormikHelpers,
   FormikProps,
