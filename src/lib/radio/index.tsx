@@ -1,6 +1,6 @@
 import { Field, FieldProps } from "formik";
 import { CSSProperties, InputHTMLAttributes, ReactNode } from "react";
-import RadioProvider from "./RadioContext";
+import RadioProvider, { RadioValue } from "./RadioContext";
 import Label from "../common/label";
 import Button from "./Button";
 import Option from "./Option";
@@ -23,7 +23,7 @@ const defaultStyle: CSSProperties = {
 const Radio = ({ name, children, style }: RadioProps) => {
   return (
     <Field id={name} name={name}>
-      {(fieldProps: FieldProps<string>) => (
+      {(fieldProps: FieldProps<RadioValue>) => (
         <RadioProvider fieldProps={fieldProps}>
           <div style={{ ...defaultStyle, ...style }}>{children}</div>
         </RadioProvider>
