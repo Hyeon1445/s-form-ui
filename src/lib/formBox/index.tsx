@@ -39,7 +39,7 @@ const FormBox = <T extends FormikValues>({
       validateOnChange={validateOnChange}
       validateOnMount={validateOnMount}
     >
-      {(formikProps: FormikProps<T>) => (
+      {(formikProps) => (
         <Form>
           <div style={{ ...defaultStyle, ...style }}>
             {children}
