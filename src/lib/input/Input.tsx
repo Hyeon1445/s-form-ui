@@ -9,7 +9,7 @@ import Counter from "./Counter";
 
 export type InputProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
-  "type" | "placeholder" | "disabled"
+  "type" | "placeholder" | "disabled" | "onChange" | "value"
 > & {
   name: string;
   disabled?: boolean;
