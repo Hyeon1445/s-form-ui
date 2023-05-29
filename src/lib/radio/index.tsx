@@ -1,15 +1,12 @@
 import { Field, FieldProps } from "formik";
-import { CSSProperties, InputHTMLAttributes, ReactNode } from "react";
+import { CSSProperties, ReactNode } from "react";
 import RadioProvider, { RadioValue } from "./RadioContext";
 import Label from "../common/label";
 import Button from "./Button";
 import Option from "./Option";
 import ErrorMessage from "./ErrorMessage";
 
-export type RadioProps = Omit<
-  InputHTMLAttributes<HTMLInputElement>,
-  "type" | "style"
-> & {
+export type RadioProps = {
   name: string;
   children: ReactNode;
   style?: CSSProperties;

@@ -3,15 +3,11 @@ import { CSSProperties, InputHTMLAttributes, useMemo } from "react";
 import { useRadioContext } from "./RadioContext";
 
 type ButtonProps = {
-  style?: CSSProperties;
   checkedStyle?: CSSProperties;
   disabledStyle?: CSSProperties;
   disabledCheckedStyle?: CSSProperties;
   disabled?: boolean | ((values: FormikValues) => boolean);
-} & Omit<
-  InputHTMLAttributes<HTMLInputElement>,
-  "size" | "type | 'style" | "onChange"
->;
+} & Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "type" | "onChange">;
 
 const defaultStyle: CSSProperties = {
   verticalAlign: "middle",

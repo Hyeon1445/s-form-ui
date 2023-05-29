@@ -3,7 +3,6 @@ import { useInputContext } from "./InputContext";
 import * as S from "./Field.style";
 
 type InputFieldProps = {
-  style?: CSSProperties;
   disabledStyle?: CSSProperties;
   errorStyle?: CSSProperties;
   type?: "text" | "number" | "password" | "color";
