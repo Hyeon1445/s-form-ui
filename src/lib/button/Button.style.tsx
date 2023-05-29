@@ -1,7 +1,7 @@
-import styled from '@emotion/styled'
+import styled from "@emotion/styled";
 
-export const Container = styled.button`
+export const Container = styled.button<{ disabled?: boolean }>`
   &:hover {
-    opacity: 0.8;
+    opacity: ${({ disabled }) => !disabled && "0.8"};
   }
-`
+`;

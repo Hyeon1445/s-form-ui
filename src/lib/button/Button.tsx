@@ -4,30 +4,36 @@ import * as S from "./Button.style";
 const defaultStyle: CSSProperties = {
   width: "10rem",
   height: "2rem",
-  background: "teal",
+  backgroundColor: "teal",
   color: "white",
   fontWeight: "bold",
   borderRadius: "8px",
 };
 
+const defaultDisabledStyle: CSSProperties = {
+  backgroundColor: "#dbdbdb",
+  cursor: "not-allowed",
+};
+
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
-  style?: CSSProperties;
+  disabledStyle?: CSSProperties;
   type?: "reset" | "submit" | "button";
 };
 
 const Button = ({
   children,
   style,
+  disabledStyle,
   type = "submit",
   ...buttonProps
 }: ButtonProps) => {
+  const commonStyle = { ...defaultStyle, ...style };
+  const buttonStyle = buttonProps.disabled
+    ? { ...commonStyle, ...defaultDisabledStyle, ...disabledStyle }
+    : commonStyle;
   return (
-    <S.Container
-      {...buttonProps}
-      style={{ ...defaultStyle, ...style }}
-      type={type}
-    >
+    <S.Container {...buttonProps} style={buttonStyle} type={type}>
       {children}
     </S.Container>
   );
