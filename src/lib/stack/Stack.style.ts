@@ -11,4 +11,5 @@ export const Stack = styled.div<StackProps>`
   margin: ${({ margin }) => margin};
   padding: ${({ padding }) => padding};
   gap: ${({ gap }) => gap};
+  flex-wrap: ${({ flexWrap }) => flexWrap};
 `;

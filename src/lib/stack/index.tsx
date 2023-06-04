@@ -12,6 +12,7 @@ export type StackProps = {
   margin?: string;
   padding?: string;
   gap?: string;
+  flexWrap?: CSSProperties["flexWrap"];
 };
 
 const Stack = ({ children, ...props }: StackProps) => {
