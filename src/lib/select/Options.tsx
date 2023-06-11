@@ -17,6 +17,16 @@ export type SelectOptionsProps = {
   isPopover?: boolean;
 };
 
+const defaultMenuStyle: CSSProperties = {
+  width: "100%",
+  listStyleType: "none",
+  borderRadius: "0.5rem",
+  maxHeight: "10rem",
+  overflowY: "auto",
+  backgroundColor: "white",
+  border: "1px solid #dbdbdb",
+};
+
 const defaultStyle: CSSProperties = {
   position: "absolute",
   zIndex: 10,
@@ -46,7 +56,7 @@ const Options = ({ children, style, isPopover = true }: SelectOptionsProps) => {
 
   if (!isPopover) {
     return (
-      <S.Container style={{ ...defaultStyle, ...style }}>
+      <S.Container style={{ ...defaultMenuStyle, ...style }}>
         {children}
       </S.Container>
     );
