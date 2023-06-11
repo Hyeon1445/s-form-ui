@@ -14,6 +14,7 @@ import * as S from "./Options.style";
 export type SelectOptionsProps = {
   children?: React.ReactNode;
   style?: CSSProperties;
+  isPopover?: boolean;
 };
 
 const defaultStyle: CSSProperties = {
@@ -28,7 +29,7 @@ const defaultStyle: CSSProperties = {
   boxShadow: "4px 4px 10px 0px rgba(0, 0, 0, 0.2)",
 };
 
-const Options = ({ children, style }: SelectOptionsProps) => {
+const Options = ({ children, style, isPopover = true }: SelectOptionsProps) => {
   const { isOpen, anchor, setIsOpen } = useSelectContext();
   const { refs, floatingStyles, context } = useFloating({
     elements: {
@@ -43,6 +44,13 @@ const Options = ({ children, style }: SelectOptionsProps) => {
   const dismiss = useDismiss(context);
   const { getFloatingProps } = useInteractions([click, dismiss]);
 
+  if (!isPopover) {
+    return (
+      <S.Container style={{ ...defaultStyle, ...style }}>
+        {children}
+      </S.Container>
+    );
+  }
   return isOpen ? (
     <S.Container
       ref={refs.setFloating}
