@@ -8,7 +8,7 @@
     "type": "git",
     "url": "https://github.com/Hyeon1445/s-form-ui.git"
   },
-  "version": "1.0.4",
+  "version": "1.0.5",
   "license": "Apache-2.0",
   "files": [
     "dist"
