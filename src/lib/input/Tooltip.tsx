@@ -5,6 +5,7 @@ import { useInputContext } from "./InputContext";
 type TooltipProps = {
   validNode?: ReactNode;
   errorNode?: ReactNode;
+  style?: CSSProperties;
 };
 
 const defaultStyle: CSSProperties = {
@@ -16,7 +17,7 @@ const defaultStyle: CSSProperties = {
   boxShadow: "4px 4px 10px 0px rgba(0, 0, 0, 0.4)",
 };
 
-const Tooltip = ({ validNode, errorNode }: TooltipProps) => {
+const Tooltip = ({ validNode, errorNode, style }: TooltipProps) => {
   const {
     fieldProps: {
       meta: { error, touched },
@@ -36,7 +37,7 @@ const Tooltip = ({ validNode, errorNode }: TooltipProps) => {
     return (
       <div
         ref={refs.setFloating}
-        style={{ ...defaultStyle, ...floatingStyles }}
+        style={{ ...defaultStyle, ...style, ...floatingStyles }}
       >
         {errorNode}
       </div>
