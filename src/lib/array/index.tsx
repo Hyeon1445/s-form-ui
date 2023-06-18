@@ -10,6 +10,7 @@ import {
   SwapButton,
   UnshiftButton,
 } from "./Buttons";
+import ErrorMessage from "./ErrorMessage";
 
 type FieldArrayProps = {
   name: string;
@@ -34,5 +35,6 @@ FieldArray.UnShiftButton = UnshiftButton;
 FieldArray.RemoveButton = RemoveButton;
 FieldArray.PopButton = PopButton;
 FieldArray.ReplaceButton = RemoveButton;
+FieldArray.ErrorMessage = ErrorMessage;
 
 export default FieldArray;
